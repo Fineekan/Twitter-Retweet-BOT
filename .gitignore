@@ -1,0 +1,13 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# build / generate output
+dist/
+
+# Logs
+logs/
+*.log
+
+# dotenv environment variable files
+.env

@@ -1,0 +1,23 @@
+{
+  "name": "time-brfurs-twitter-bot",
+  "version": "1.0.0",
+  "description": "Automatic Retweet on Twitter with Hashtag #BRFursTeam",
+  "author": "Fineekan <fineekan@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "tsc && node ./dist",
+    "start:dev": "ts-node-dev --transpil-only --ignore-watch ./index.ts",
+    "prettier": "prettier --config .prettierrc 'index.ts' --write"
+  },
+  "devDependencies": {
+    "@types/node": "^18.6.4",
+    "prettier": "^2.7.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "twitter-api-v2": "^1.12.3"
+  }
+}
