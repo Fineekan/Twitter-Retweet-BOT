@@ -9,9 +9,10 @@
     "node": "^12.22.0 || >=14.17.0 <15"
   },
   "scripts": {
-    "start": "tsc && node ./dist",
-    "start:dev": "ts-node-dev --transpile-only --ignore-watch ./index.ts",
-    "prettier": "prettier --config .prettierrc 'index.ts' --write"
+    "start": "node ./dist/app.js",
+    "start:dev": "ts-node-dev ./index.ts",
+    "prettier": "prettier --config .prettierrc 'index.ts' --write",
+    "postinstall": "npm run tsc"
   },
   "devDependencies": {
     "@types/node": "^18.6.4",
