@@ -21,7 +21,8 @@
 				"EditorConfig.EditorConfig",
 				"streetsidesoftware.code-spell-checker",
 				"esbenp.prettier-vscode",
-				"IronGeek.vscode-env"
+				"IronGeek.vscode-env",
+				"steoates.autoimport"
 			]
 		}
 	},

@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv'
+import cron from 'node-cron'
 import { TwitterApi } from 'twitter-api-v2'
 
 // env
@@ -115,12 +116,13 @@ const main = async () => {
   }
 }
 
-;(async () => {
+// call 15min
+cron.schedule('0 */15 * * * *', async () => {
   try {
     // console.log(await getIDuser('FineekoPotara'))
-    setInterval(await main, 10000)
+    await main()
   } catch (error) {
     console.log(error)
     process.exit(-1)
   }
-})()
+})
