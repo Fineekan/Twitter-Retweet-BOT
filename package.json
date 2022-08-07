@@ -12,6 +12,7 @@
     "start": "node ./dist/app.js",
     "start:dev": "ts-node-dev ./index.ts",
     "prettier": "prettier --config .prettierrc 'index.ts' --write",
+    "tsc": "./node_modules/typescript/bin/tsc",
     "postinstall": "npm run tsc"
   },
   "devDependencies": {
