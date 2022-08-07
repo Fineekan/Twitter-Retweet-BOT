@@ -5,9 +5,12 @@
   "author": "Fineekan <fineekan@gmail.com>",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": "^12.22.0 || >=14.17.0 <15"
+  },
   "scripts": {
     "start": "tsc && node ./dist",
-    "start:dev": "ts-node-dev --transpil-only --ignore-watch ./index.ts",
+    "start:dev": "ts-node-dev --transpile-only --ignore-watch ./index.ts",
     "prettier": "prettier --config .prettierrc 'index.ts' --write"
   },
   "devDependencies": {
