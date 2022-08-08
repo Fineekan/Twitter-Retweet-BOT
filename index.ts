@@ -25,7 +25,7 @@ const getIDuser = async (name: string | string[]) => {
 }
 
 // TODO: only authorized accounts on Discord
-const AUTHORIZED_AUTHORS = ['43547119', '386814786', '95005551']
+const AUTHORIZED_AUTHORS = ['43547119', '386814786', '2903557745', '95005551']
 const authUserList = async () => {
   try {
     const { data } = await roClient.v2.users(AUTHORIZED_AUTHORS)
@@ -116,13 +116,25 @@ const main = async () => {
   }
 }
 
-// call 15min
-cron.schedule('0 */15 * * * *', async () => {
-  try {
-    // console.log(await getIDuser('FineekoPotara'))
-    await main()
-  } catch (error) {
-    console.log(error)
-    process.exit(-1)
-  }
-})
+if (process.env.NODE_ENV === 'production') {
+  // call 15min
+  cron.schedule('0 */15 * * * *', async () => {
+    try {
+      await main()
+    } catch (error) {
+      console.log(error)
+      process.exit(-1)
+    }
+  })
+} else {
+  // call 1min
+  cron.schedule('* * * * *', async () => {
+    try {
+      console.log(await getIDuser('FineekoPotara'))
+      // await main()
+    } catch (error) {
+      console.log(error)
+      process.exit(-1)
+    }
+  })
+}
