@@ -13,6 +13,10 @@ const twitterClient = new TwitterApi({
 // Tell typescript it's a readonly app
 const roClient = twitterClient.readOnly
 
+const changeTimeZone = (date: string | number | Date, timeZone: string) => {
+  return new Date(new Date(date).toLocaleString('pt-BR', { timeZone }))
+}
+
 // TODO: Internal for AUTHORIZED_AUTHORS
 const getIDuser = async (name: string | string[]) => {
   try {
@@ -55,7 +59,7 @@ const searchTag = async () => {
 
 const main = async () => {
   try {
-    const date = new Date(new Date().setHours(0, 0, 0, 0))
+    const date = changeTimeZone(new Date(), 'America/Sao_Paulo')
     console.info('')
     console.info(`Date: ${date.toLocaleDateString('pt-BR')} (dd/mm/yyyy)`)
     console.info('BRFurs - TwitterBot - v1')
@@ -78,7 +82,7 @@ const main = async () => {
       console.info('')
       const arrTweetsID = foundTweets.map(el => ({
         id: el.id,
-        dayDate: new Date(new Date(el.created_at!).setHours(0, 0, 0, 0)),
+        dayDate: changeTimeZone(new Date(el.created_at!), 'America/Sao_Paulo'),
         author: userAuth.find(item => item.id === el.author_id),
       }))
 
@@ -92,7 +96,10 @@ const main = async () => {
           `[${i + 1}]: checking tweet from ${el.author?.username}...`
         )
 
-        if (el.dayDate !== date) {
+        if (
+          new Date(el.dayDate.setUTCHours(0, 0, 0, 0)).getTime() !==
+          new Date(date.setUTCHours(0, 0, 0, 0)).getTime()
+        ) {
           console.info(
             `twitter not done on ${date.toLocaleDateString('pt-BR')}, skip...`
           )
@@ -130,8 +137,8 @@ if (process.env.NODE_ENV === 'production') {
   // call 1min
   cron.schedule('* * * * *', async () => {
     try {
-      console.log(await getIDuser('FineekoPotara'))
-      // await main()
+      // console.log(await getIDuser('FineekoPotara'))
+      await main()
     } catch (error) {
       console.log(error)
       process.exit(-1)
